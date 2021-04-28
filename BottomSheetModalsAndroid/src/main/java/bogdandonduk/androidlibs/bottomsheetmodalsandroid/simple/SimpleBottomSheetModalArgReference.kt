@@ -1,11 +1,8 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple
 
-import android.os.Parcelable
 import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 class SimpleBottomSheetModalArgReference(
     var backgroundColor: Int,
     var title: String,
@@ -18,4 +15,4 @@ class SimpleBottomSheetModalArgReference(
     var negativeBtnText: String,
     var negativeBtnTextColor: Int,
     var negativeBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit
-) : Parcelable
+)

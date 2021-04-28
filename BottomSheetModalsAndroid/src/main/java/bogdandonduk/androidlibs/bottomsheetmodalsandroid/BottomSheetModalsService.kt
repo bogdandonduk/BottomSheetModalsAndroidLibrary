@@ -8,7 +8,6 @@ import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomShee
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 object BottomSheetModalsService {
-    const val KEY_ARGUMENT_SIMPLE_MODAL_ARG_REFERENCE = "key_argument_simple_modal_caller"
     const val KEY_ARGUMENT_TAG = "key_argument_tag"
 
     private val simpleModalsArgReferencesMap = mutableMapOf<String, SimpleBottomSheetModalArgReference>()
@@ -26,7 +25,7 @@ object BottomSheetModalsService {
         positiveBtnTextColor: Int,
         positiveBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
         negativeBtnText: String,
-        negativeBtnTextColor: Int,
+        negativeBtnTextColor: Int = positiveBtnTextColor,
         negativeBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
         tag: String
     ) {
@@ -47,12 +46,9 @@ object BottomSheetModalsService {
                 )
 
             val modal = SimpleBottomSheetModal()
-            modal.arguments = bundleOf(
-                KEY_ARGUMENT_SIMPLE_MODAL_ARG_REFERENCE to simpleModalsArgReferencesMap[tag],
-                KEY_ARGUMENT_TAG to tag
-            )
+                modal.arguments = bundleOf(KEY_ARGUMENT_TAG to tag)
 
-            modal.show(fragmentManager, tag)
+                modal.show(fragmentManager, tag)
         }
     }
 

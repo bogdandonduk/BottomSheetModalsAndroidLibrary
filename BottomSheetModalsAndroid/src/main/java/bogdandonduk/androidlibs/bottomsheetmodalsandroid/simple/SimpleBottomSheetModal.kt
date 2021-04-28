@@ -17,11 +17,13 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(),
 
     override var viewModel: SimpleBottomSheetModalViewModel? = null
     override val viewModelInitialization: () -> SimpleBottomSheetModalViewModel = {
+        val tag = requireArguments().getString(BottomSheetModalsService.KEY_ARGUMENT_TAG)!!
+
         ViewModelProvider(
             viewModelStore,
             SimpleBottomSheetModalViewModel.Factory(
-                requireArguments().get(BottomSheetModalsService.KEY_ARGUMENT_SIMPLE_MODAL_ARG_REFERENCE) as SimpleBottomSheetModalArgReference,
-                requireArguments().getString(BottomSheetModalsService.KEY_ARGUMENT_TAG)!!
+                BottomSheetModalsService.getSimpleModalArgReferenceForTag(tag)!!,
+                tag
             )
         ).get(SimpleBottomSheetModalViewModel::class.java)
     }
