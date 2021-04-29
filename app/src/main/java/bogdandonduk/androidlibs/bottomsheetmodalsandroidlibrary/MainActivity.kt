@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
                 "TITLE",
                 "TEXT",
                 Color.WHITE,
-                positiveBtnText = "CONFIRM",
+                positiveBtnText = "Confirm",
                 positiveBtnTextColor = Color.GREEN,
                 positiveBtnClickAction = positiveLambda,
-                negativeBtnText = "CANCEL",
+                negativeBtnText = "Cancel",
                 negativeBtnTextColor = Color.RED,
                 negativeBtnClickAction = negativeLambda,
                 tag = "some_modal"

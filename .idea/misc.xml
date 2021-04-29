@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout-land/layout_simple_bottom_sheet_modal.xml" value="0.1675485008818342" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_simple_bottom_sheet_modal.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
       </map>
