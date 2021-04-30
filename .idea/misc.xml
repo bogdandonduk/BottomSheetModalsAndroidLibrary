@@ -12,7 +12,7 @@
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw480dp-land/layout_simple_bottom_sheet_modal.xml" value="0.6395131086142322" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw480dp/layout_simple_bottom_sheet_modal.xml" value="0.7003968253968254" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw600dp-land/layout_simple_bottom_sheet_modal.xml" value="0.67" />
-        <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw600dp/layout_simple_bottom_sheet_modal.xml" value="1.0" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw600dp/layout_simple_bottom_sheet_modal.xml" value="0.5" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_simple_bottom_sheet_modal.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
       </map>
