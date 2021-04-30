@@ -3,6 +3,7 @@ package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -18,6 +19,7 @@ abstract class BaseBottomSheetModal : BottomSheetDialogFragment() {
     }
 
     override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
         dismiss()
     }
 
