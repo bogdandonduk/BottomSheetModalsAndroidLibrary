@@ -19,16 +19,7 @@ abstract class BaseBottomSheetModal : BottomSheetDialogFragment() {
     }
 
     override fun onCancel(dialog: DialogInterface) {
-        super.onCancel(dialog)
-        Log.d("TAG", "onCancel: CANCEL")
         dismiss()
-    }
-
-    override fun dismiss() {
-        super.dismiss()
-
-        Log.d("TAG", "onCancel: DISMISS")
-
     }
 
     fun expandSheet() {

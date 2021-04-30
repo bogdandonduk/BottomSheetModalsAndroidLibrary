@@ -1,5 +1,6 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,12 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(),
                 tag
             )
         ).get(SimpleBottomSheetModalViewModel::class.java)
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        getCurrentViewModel().argReference.onDismissAction?.invoke(dialog)
     }
 
     override fun onCreateView(

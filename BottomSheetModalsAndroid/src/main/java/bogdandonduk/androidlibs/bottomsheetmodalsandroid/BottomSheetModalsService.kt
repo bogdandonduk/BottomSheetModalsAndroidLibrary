@@ -1,5 +1,6 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
+import android.content.DialogInterface
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
@@ -27,7 +28,8 @@ object BottomSheetModalsService {
         negativeBtnText: String,
         negativeBtnTextColor: Int = positiveBtnTextColor,
         negativeBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
-        tag: String
+        tag: String,
+        onDismissAction: ((modal: DialogInterface) -> Unit)?  = null
     ) {
         if(!modalShowingCurrently) {
             if(!simpleModalsArgReferencesMap.containsKey(tag))
@@ -42,7 +44,8 @@ object BottomSheetModalsService {
                     positiveBtnClickAction = positiveBtnClickAction,
                     negativeBtnText = negativeBtnText,
                     negativeBtnTextColor = negativeBtnTextColor,
-                    negativeBtnClickAction = negativeBtnClickAction
+                    negativeBtnClickAction = negativeBtnClickAction,
+                    onDismissAction = onDismissAction
                 )
 
             val modal = SimpleBottomSheetModal()
