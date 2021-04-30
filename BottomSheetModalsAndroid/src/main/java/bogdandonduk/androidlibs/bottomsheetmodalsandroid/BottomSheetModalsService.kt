@@ -29,7 +29,7 @@ object BottomSheetModalsService {
         negativeBtnTextColor: Int = positiveBtnTextColor,
         negativeBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
         tag: String,
-        onDismissAction: ((modal: DialogInterface) -> Unit)?  = null
+        onCancelAction: ((modal: DialogInterface) -> Unit)?  = null
     ) {
         if(!modalShowingCurrently) {
             if(!simpleModalsArgReferencesMap.containsKey(tag))
@@ -45,7 +45,7 @@ object BottomSheetModalsService {
                     negativeBtnText = negativeBtnText,
                     negativeBtnTextColor = negativeBtnTextColor,
                     negativeBtnClickAction = negativeBtnClickAction,
-                    onDismissAction = onDismissAction
+                    onCancelAction = onCancelAction
                 )
 
             val modal = SimpleBottomSheetModal()

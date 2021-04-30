@@ -29,10 +29,10 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(),
         ).get(SimpleBottomSheetModalViewModel::class.java)
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
 
-        getCurrentViewModel().argReference.onDismissAction?.invoke(dialog)
+        getCurrentViewModel().argReference.onCancelAction?.invoke(dialog)
     }
 
     override fun onCreateView(
