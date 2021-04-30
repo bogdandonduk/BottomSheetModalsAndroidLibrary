@@ -35,6 +35,12 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(),
         getCurrentViewModel().argReference.onCancelAction?.invoke(dialog)
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        getCurrentViewModel().argReference.onDismissAction?.invoke(dialog)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

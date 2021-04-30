@@ -16,5 +16,6 @@ class SimpleBottomSheetModalArgReference(
     var negativeBtnText: String,
     var negativeBtnTextColor: Int,
     var negativeBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
-    var onCancelAction: ((modal: DialogInterface) -> Unit)?
+    var onCancelAction: ((modal: DialogInterface) -> Unit)?,
+    var onDismissAction: ((modal: DialogInterface) -> Unit)?
 )
