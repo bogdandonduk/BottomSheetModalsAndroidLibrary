@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager,
                 Color.BLACK,
                 "TITLE",
-                "TEXT",
+                "TEXTrre8r7wn0twe89rwy09dey8qwrybwufybtriweynfoisuiofhilgvhsklfgioerutunowinyto8weutwiutiowutioewrhtioewrumiotewuorwmiurhwiurywiufiuwbgfyiuwfupoaifposuigeyrioghdioghskjvbksjdfjhkus gkjshnsgfkusehnfiusgfiuhsiofapofhosiyhfoishfioshrgkshkjfvishviusl",
                 Color.WHITE,
                 positiveBtnText = "Confirm",
                 positiveBtnTextColor = Color.GREEN,
