@@ -9,11 +9,11 @@ import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomShee
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 object BottomSheetModalsService {
-    const val KEY_ARGUMENT_TAG = "key_argument_tag"
-
-    private val simpleModalsArgReferencesMap = mutableMapOf<String, SimpleBottomSheetModalArgReference>()
+    val simpleModalsArgReferencesMap = mutableMapOf<String, SimpleBottomSheetModalArgReference>()
 
     @Volatile var modalShowingCurrently = false
+
+    fun startBuildingSimpleModal(tag: String) = SimpleBottomSheetModal.Builder(tag)
 
     fun showSimpleModal(
         fragmentManager: FragmentManager,
@@ -22,12 +22,12 @@ object BottomSheetModalsService {
         text: String,
         textColor: Int,
         titleColor: Int = textColor,
-        positiveBtnText: String,
-        positiveBtnTextColor: Int,
-        positiveBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
-        negativeBtnText: String,
-        negativeBtnTextColor: Int = positiveBtnTextColor,
-        negativeBtnClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
+        positiveButtonText: String,
+        positiveButtonTextColor: Int,
+        positiveButtonClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
+        negativeButtonText: String,
+        negativeButtonTextColor: Int = positiveButtonTextColor,
+        negativeButtonClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
         tag: String,
         onCancelAction: ((modal: DialogInterface) -> Unit)?  = null,
         onDismissAction: ((modal: DialogInterface) -> Unit)?  = null
@@ -40,20 +40,17 @@ object BottomSheetModalsService {
                     text = text,
                     textColor = textColor,
                     titleColor = titleColor,
-                    positiveBtnText = positiveBtnText,
-                    positiveBtnTextColor = positiveBtnTextColor,
-                    positiveBtnClickAction = positiveBtnClickAction,
-                    negativeBtnText = negativeBtnText,
-                    negativeBtnTextColor = negativeBtnTextColor,
-                    negativeBtnClickAction = negativeBtnClickAction,
+                    positiveButtonText = positiveButtonText,
+                    positiveButtonTextColor = positiveButtonTextColor,
+                    positiveButtonClickAction = positiveButtonClickAction,
+                    negativeButtonText = negativeButtonText,
+                    negativeButtonTextColor = negativeButtonTextColor,
+                    negativeButtonClickAction = negativeButtonClickAction,
                     onCancelAction = onCancelAction,
                     onDismissAction = onDismissAction
                 )
 
-            val modal = SimpleBottomSheetModal()
-                modal.arguments = bundleOf(KEY_ARGUMENT_TAG to tag)
-
-                modal.show(fragmentManager, tag)
+            SimpleBottomSheetModal().show(fragmentManager, tag)
         }
     }
 
