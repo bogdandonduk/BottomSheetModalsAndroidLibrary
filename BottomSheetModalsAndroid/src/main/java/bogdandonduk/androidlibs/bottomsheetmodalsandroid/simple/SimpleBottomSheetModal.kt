@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -50,25 +51,8 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
     }
 
     override fun redraw() {
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewBinding = LayoutSimpleBottomSheetModalBinding.inflate(inflater, container, false)
-
-        return viewBinding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
         with(viewBinding) {
             getCurrentViewModel().let {
-
                 layoutSimpleBottomSheetModalContentConstraintLayout.background = getBackgroundDrawable(it.argReference.backgroundColor)
 
                 initializeList(
@@ -109,12 +93,10 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
 
                 layoutSimpleBottomSheetModalButtonDividerLinearLayout.setBackgroundColor(it.argReference.title.textColor)
 
-//                if(it.argReference.additionalButtonsSection.buttonItems.isNotEmpty()) {
-                    layoutSimpleBottomSheetModalButtonDividerLinearLayout2.run {
-                        visibility = View.VISIBLE
-                        setBackgroundColor(it.argReference.title.textColor)
-                    }
+                if(it.argReference.additionalButtonsSection.buttonItems.isNotEmpty()) {
+                    layoutSimpleBottomSheetModalButtonDivider2ContainerConstraintLayout.visibility = View.VISIBLE
 
+                    layoutSimpleBottomSheetModalButtonDivider2LinearLayout.setBackgroundColor(it.argReference.title.textColor)
                     layoutSimpleBottomSheetModalMoreOptionsButtonContainerCardView.visibility = View.VISIBLE
 
                     layoutSimpleBottomSheetModalMoreOptionsButtonContainerConstraintLayout.run {
@@ -123,9 +105,25 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
 
                         }
                     }
-//                }
+                }
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        viewBinding = LayoutSimpleBottomSheetModalBinding.inflate(inflater, container, false)
+
+        return viewBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        redraw()
     }
 
     override fun onCreateContextMenu(

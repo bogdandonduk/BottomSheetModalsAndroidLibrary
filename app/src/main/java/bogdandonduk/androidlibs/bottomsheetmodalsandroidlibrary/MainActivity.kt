@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.AdditionalButtonsSection
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.ButtonItem
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.TextItem
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalArgReference
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity() {
                         textItems = mutableListOf<TextItem>().apply { add(TextItem(getDrawable(R.drawable.ic_baseline_bolt_24), "Text", Color.BLACK)) },
                         positiveButton = ButtonItem("Confirm", Color.BLACK, positiveLambda),
                         negativeButton = ButtonItem("Cancel", Color.BLACK, negativeLambda),
+                        additionalButtonsSection = AdditionalButtonsSection(getDrawable(R.drawable.ic_overflow_menu), "New options", mutableListOf<ButtonItem>().apply {
+                            add(ButtonItem("Button 1", Color.BLACK) { _: View, _: BottomSheetDialogFragment ->
+
+                            })
+                        }),
                         tag = "some_modal"
                     )
             }
