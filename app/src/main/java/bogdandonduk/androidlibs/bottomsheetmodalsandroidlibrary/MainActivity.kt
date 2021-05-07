@@ -3,8 +3,14 @@ package bogdandonduk.androidlibs.bottomsheetmodalsandroidlibrary
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.ButtonItem
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.TextItem
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalArgReference
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,25 +28,88 @@ class MainActivity : AppCompatActivity() {
         }
 
         launchText.setOnClickListener {
-            BottomSheetModalsService.showSimpleModal(
-                supportFragmentManager,
-                Color.BLACK,
-                "TITLE",
-                "TEXTrre8r7wn0twe89rwy09dey8qwrybwufybtriweynfoisuiofhilgvhsklfgioerutunowinyto8weutwiutiowutioewrhtioewrumiotewuorwmiurhwiurywiufiuwbgfyiuwfupoaifposuigeyrioghdioghskjvbksjdfjhkus gkjshnsgfkusehnfiusgfiuhsiofapofhosiyhfoishfioshrgkshkjfvishviusl",
-                Color.WHITE,
-                positiveBtnText = "Confirm",
-                positiveBtnTextColor = Color.GREEN,
-                positiveBtnClickAction = positiveLambda,
-                negativeBtnText = "Cancel",
-                negativeBtnTextColor = Color.RED,
-                negativeBtnClickAction = negativeLambda,
-                tag = "some_modal"
-            )
-        }
+            column.addView(
+                LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL
 
-        BottomSheetModalsService.getSimpleModalArgReferenceForTag("some_modal")?.run {
-            positiveBtnClickAction = positiveLambda
-            negativeBtnClickAction = negativeLambda
+                    addView(ImageView(this@MainActivity).apply { setImageResource(R.drawable.ic_baseline_bolt_24) })
+                    addView(TextView(this@MainActivity).apply { text = "I am dynamic text" })
+                }
+            )
+
+            with(BottomSheetModalsService) {
+                showSimpleModal(
+                        fragmentManager = supportFragmentManager,
+                        backgroundColor = Color.WHITE,
+                        title = TextItem(null, "Title", Color.BLACK),
+                        textItems = mutableListOf<TextItem>().apply { add(TextItem(getDrawable(R.drawable.ic_baseline_bolt_24), "Text", Color.BLACK)) },
+                        positiveButton = ButtonItem("Confirm", Color.BLACK, positiveLambda),
+                        negativeButton = ButtonItem("Cancel", Color.BLACK, negativeLambda),
+                        tag = "some_modal"
+                    )
+            }
+        }
+//            BottomSheetModalsService.showListModal(
+//                fragmentManager = supportFragmentManager,
+//                backgroundColor = Color.BLACK,
+//                title = "TITLE",
+//                textColor = Color.WHITE,
+//                listItems = mutableListOf<ListBottomSheetModal.Item>().apply {
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//                    add(ListBottomSheetModal.Item(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_content_copy_24, null), "A NEW ITEM"))
+//
+//                },
+//                positiveButtonText = "Confirm",
+//                positiveButtonTextColor = Color.GREEN,
+//                positiveButtonClickAction = positiveLambda,
+//                negativeButtonText = "Cancel",
+//                negativeButtonTextColor = Color.RED,
+//                negativeButtonClickAction = negativeLambda,
+//                tag = "some_modal"
+//            )
+//        }
+
+        BottomSheetModalsService.getModalArgReferenceForTag<SimpleBottomSheetModalArgReference>("some_modal")?.run {
+            positiveButton.clickAction = positiveLambda
+            negativeButton.clickAction = negativeLambda
         }
     }
 }

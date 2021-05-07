@@ -3,18 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/drawable/bg_button.xml" value="0.2140625" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/drawable/bg_button_pressed.xml" value="0.16666666666666666" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/drawable/bg_button_ripple.xml" value="0.3055555555555556" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/drawable/bg_ripple_button.xml" value="0.2140625" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/drawable/ic_baseline_content_copy_24.xml" value="0.203125" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/drawable/ic_overflow_menu.xml" value="0.24814814814814815" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-h600dp/layout_simple_bottom_sheet_modal.xml" value="0.3138586956521739" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-land-sw600dp/layout_simple_bottom_sheet_modal.xml" value="0.21736453201970443" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-land/layout_simple_bottom_sheet_modal.xml" value="0.3011463844797178" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw320dp-land/layout_list_bottom_sheet_modal.xml" value="0.29322916666666665" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw320dp-land/layout_simple_bottom_sheet_modal.xml" value="0.3011463844797178" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw320dp/layout_simple_bottom_sheet_modal.xml" value="0.3162037037037037" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw400dp-land/layout_simple_bottom_sheet_modal.xml" value="1.0" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw480dp-land/layout_simple_bottom_sheet_modal.xml" value="0.6395131086142322" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw480dp/layout_simple_bottom_sheet_modal.xml" value="0.7003968253968254" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw600dp-land/layout_simple_bottom_sheet_modal.xml" value="0.67" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw600dp/layout_list_bottom_sheet_modal.xml" value="0.341626213592233" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout-sw600dp/layout_simple_bottom_sheet_modal.xml" value="0.5" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_list_bottom_sheet_modal.xml" value="0.33" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_list_bottom_sheet_modal_item.xml" value="0.35572916666666665" />
         <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_simple_bottom_sheet_modal.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19427083333333334" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_simple_bottom_sheet_modal_text.xml" value="0.17864583333333334" />
+        <entry key="BottomSheetModalsAndroid/src/main/res/layout/layout_simple_bottom_sheet_modal_text_item.xml" value="0.5972027972027972" />
+        <entry key="app/src/main/res/drawable/bg_ripple_button.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/drawable/ic_baseline_bolt_24.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
       </map>
     </option>
   </component>

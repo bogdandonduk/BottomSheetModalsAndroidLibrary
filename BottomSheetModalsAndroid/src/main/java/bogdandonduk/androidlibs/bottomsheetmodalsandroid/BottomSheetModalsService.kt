@@ -1,15 +1,21 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
 import android.content.DialogInterface
-import android.view.View
-import androidx.core.os.bundleOf
+import androidx.annotation.ColorInt
 import androidx.fragment.app.FragmentManager
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.AdditionalButtonsSection
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.ButtonItem
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.TextItem
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.RedrawingModal
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModal
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalArgReference
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModal
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalArgReference
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 object BottomSheetModalsService {
-    val simpleModalsArgReferencesMap = mutableMapOf<String, SimpleBottomSheetModalArgReference>()
+    private val modalArgReferencesMap = mutableMapOf<String, BaseBottomSheetModalArgReference>()
+
+    private val modalsMap = mutableMapOf<String, BaseBottomSheetModal>()
 
     @Volatile var modalShowingCurrently = false
 
@@ -17,46 +23,57 @@ object BottomSheetModalsService {
 
     fun showSimpleModal(
         fragmentManager: FragmentManager,
-        backgroundColor: Int,
-        title: String,
-        text: String,
-        textColor: Int,
-        titleColor: Int = textColor,
-        positiveButtonText: String,
-        positiveButtonTextColor: Int,
-        positiveButtonClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
-        negativeButtonText: String,
-        negativeButtonTextColor: Int = positiveButtonTextColor,
-        negativeButtonClickAction: (view: View, modal: BottomSheetDialogFragment) -> Unit,
+        @ColorInt backgroundColor: Int,
+        title: TextItem,
+        textItems: MutableList<TextItem>,
+        positiveButton: ButtonItem,
+        negativeButton: ButtonItem,
+        additionalButtonsSection: AdditionalButtonsSection = AdditionalButtonsSection(null, "More options", mutableListOf()),
         tag: String,
-        onCancelAction: ((modal: DialogInterface) -> Unit)?  = null,
-        onDismissAction: ((modal: DialogInterface) -> Unit)?  = null
+        onCancelAction: ((modal: DialogInterface) -> Unit)? = null,
+        onDismissAction: ((modal: DialogInterface) -> Unit)? = null
     ) {
         if(!modalShowingCurrently) {
-            if(!simpleModalsArgReferencesMap.containsKey(tag))
-                simpleModalsArgReferencesMap[tag] = SimpleBottomSheetModalArgReference(
-                    backgroundColor = backgroundColor,
-                    title = title,
-                    text = text,
-                    textColor = textColor,
-                    titleColor = titleColor,
-                    positiveButtonText = positiveButtonText,
-                    positiveButtonTextColor = positiveButtonTextColor,
-                    positiveButtonClickAction = positiveButtonClickAction,
-                    negativeButtonText = negativeButtonText,
-                    negativeButtonTextColor = negativeButtonTextColor,
-                    negativeButtonClickAction = negativeButtonClickAction,
-                    onCancelAction = onCancelAction,
-                    onDismissAction = onDismissAction
-                )
+            addModalArgReferenceForTag(tag, SimpleBottomSheetModalArgReference(
+                backgroundColor = backgroundColor,
+                title = title,
+                textItems = textItems,
+                positiveButton = positiveButton,
+                negativeButton = negativeButton,
+                additionalButtonsSection = additionalButtonsSection,
+                onCancelAction = onCancelAction,
+                onDismissAction = onDismissAction
+            ))
 
             SimpleBottomSheetModal().show(fragmentManager, tag)
         }
     }
 
-    fun getSimpleModalArgReferenceForTag(tag: String) = simpleModalsArgReferencesMap[tag]
-
-    fun removeSimpleModalArgReferenceForTag(tag: String) {
-        simpleModalsArgReferencesMap.remove(tag)
+    fun addModalArgReferenceForTag(tag: String, argReference: BaseBottomSheetModalArgReference) {
+        if(modalArgReferencesMap.containsKey(tag) && modalArgReferencesMap[tag]!!::class.java != argReference::class.java)
+            throw IllegalArgumentException("modalArgReferencesMap already contains item with this tag but its type is different from type of passed argReference")
+        else if(!modalArgReferencesMap.containsKey(tag))
+            modalArgReferencesMap[tag] = argReference
     }
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T : BaseBottomSheetModalArgReference> getModalArgReferenceForTag(tag: String) = modalArgReferencesMap[tag] as T?
+
+    fun removeModalArgReferenceForTag(tag: String) {
+        modalArgReferencesMap.remove(tag)
+    }
+
+    fun addModalForTag(tag: String, modal: BaseBottomSheetModal, override: Boolean = true) {
+        if(override || !modalsMap.containsKey(tag))
+            modalsMap[tag] = modal
+    }
+
+    fun <BaseBottomSheetModalArgReference> getModalForTag(tag: String) = modalsMap[tag]
+
+    fun removeModalForTag(tag: String) {
+        modalsMap.remove(tag)
+    }
+
+    fun <BaseBottomSheetModalArgReference> getRedrawingModalForTag(tag: String) = modalsMap[tag] as RedrawingModal
+
 }
