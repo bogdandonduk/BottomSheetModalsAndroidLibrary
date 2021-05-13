@@ -1,16 +1,11 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
-import android.content.DialogInterface
-import androidx.annotation.ColorInt
-import androidx.fragment.app.FragmentManager
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.AdditionalButtonsSection
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.ButtonItem
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.TextItem
+import android.os.Handler
+import android.os.Looper
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.RedrawingModal
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModal
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalArgReference
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModal
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalArgReference
 
 object BottomSheetModalsService {
     private val modalArgReferencesMap = mutableMapOf<String, BaseBottomSheetModalArgReference>()
@@ -19,35 +14,9 @@ object BottomSheetModalsService {
 
     @Volatile var modalShowingCurrently = false
 
-    fun startBuildingSimpleModal(tag: String) = SimpleBottomSheetModal.Builder(tag)
+    val handler = Handler(Looper.getMainLooper())
 
-    fun showSimpleModal(
-        fragmentManager: FragmentManager,
-        @ColorInt backgroundColor: Int,
-        title: TextItem,
-        textItems: MutableList<TextItem>,
-        positiveButton: ButtonItem,
-        negativeButton: ButtonItem,
-        additionalButtonsSection: AdditionalButtonsSection = AdditionalButtonsSection(null, "More options", mutableListOf()),
-        tag: String,
-        onCancelAction: ((modal: DialogInterface) -> Unit)? = null,
-        onDismissAction: ((modal: DialogInterface) -> Unit)? = null
-    ) {
-        if(!modalShowingCurrently) {
-            addModalArgReferenceForTag(tag, SimpleBottomSheetModalArgReference(
-                backgroundColor = backgroundColor,
-                title = title,
-                textItems = textItems,
-                positiveButton = positiveButton,
-                negativeButton = negativeButton,
-                additionalButtonsSection = additionalButtonsSection,
-                onCancelAction = onCancelAction,
-                onDismissAction = onDismissAction
-            ))
-
-            SimpleBottomSheetModal().show(fragmentManager, tag)
-        }
-    }
+    fun startBuildingSimpleModal(tag: String): SimpleBottomSheetModal.Builder = SimpleBottomSheetModal.Builder(tag)
 
     fun addModalArgReferenceForTag(tag: String, argReference: BaseBottomSheetModalArgReference) {
         if(modalArgReferencesMap.containsKey(tag) && modalArgReferencesMap[tag]!!::class.java != argReference::class.java)
@@ -75,5 +44,4 @@ object BottomSheetModalsService {
     }
 
     fun <BaseBottomSheetModalArgReference> getRedrawingModalForTag(tag: String) = modalsMap[tag] as RedrawingModal
-
 }

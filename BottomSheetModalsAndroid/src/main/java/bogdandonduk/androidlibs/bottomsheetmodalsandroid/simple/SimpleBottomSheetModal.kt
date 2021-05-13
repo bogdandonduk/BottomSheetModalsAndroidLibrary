@@ -1,21 +1,19 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.PopupWindow
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.AdditionalButtonsSection
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.ButtonItem
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.TextItem
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.R
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.anatomy.BottomSheetModalAnatomy
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModal
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.databinding.LayoutSimpleBottomSheetModalBinding
 import bogdandonduk.androidlibs.recyclerviewutilsandroid.RecyclerViewHost
@@ -27,6 +25,8 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
     override lateinit var viewBinding: LayoutSimpleBottomSheetModalBinding
 
     override var viewModel: SimpleBottomSheetModalViewModel? = null
+
+    var scrollInProgress: Boolean = false
 
     override val viewModelInitialization: () -> SimpleBottomSheetModalViewModel = {
         ViewModelProvider(
@@ -50,17 +50,20 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
         getCurrentViewModel().argReference.onDismissAction?.invoke(dialog)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun redraw() {
         with(viewBinding) {
             getCurrentViewModel().let {
-                layoutSimpleBottomSheetModalContentConstraintLayout.background = getBackgroundDrawable(it.argReference.backgroundColor)
+                layoutSimpleBottomSheetModalContentContainerConstraintLayout.background = BottomSheetModalAnatomy.Background.getModalBackgroundDrawable(it.argReference.backgroundColor)
 
                 initializeList(
                     layoutSimpleBottomSheetModalTextContainerRecyclerView,
                     adapter = SimpleBottomSheetModalAdapter(
                         title = it.argReference.title,
                         textItems = it.argReference.textItems,
-                        hostActivity = requireActivity()
+                        hostActivity = requireActivity(),
+                        touchHolder = layoutSimpleBottomSheetModalTouchConstraintLayout,
+                        modalContextPopupMenu = it.argReference.modalContextPopupMenu
                     ),
                     layoutManager = GridLayoutManager(fragmentContext, 1)
                 )
@@ -93,17 +96,31 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
 
                 layoutSimpleBottomSheetModalButtonDividerLinearLayout.setBackgroundColor(it.argReference.title.textColor)
 
-                if(it.argReference.additionalButtonsSection.buttonItems.isNotEmpty()) {
+                if(it.argReference.overflowButtonsContextPopupMenu.items.isNotEmpty()) {
+                    DrawableCompat.setTint(layoutSimpleBottomSheetModalMoreOptionsButtonIconImageView.drawable, it.argReference.title.textColor)
+
                     layoutSimpleBottomSheetModalButtonDivider2ContainerConstraintLayout.visibility = View.VISIBLE
 
                     layoutSimpleBottomSheetModalButtonDivider2LinearLayout.setBackgroundColor(it.argReference.title.textColor)
                     layoutSimpleBottomSheetModalMoreOptionsButtonContainerCardView.visibility = View.VISIBLE
 
                     layoutSimpleBottomSheetModalMoreOptionsButtonContainerConstraintLayout.run {
-                        TooltipCompat.setTooltipText(this, it.argReference.additionalButtonsSection.overflowIconTooltipText)
+                        post {
+                            TooltipCompat.setTooltipText(this, it.argReference.overflowButtonsContextPopupMenu.overflowButtonTooltipText)
+                        }
+                    }
+
+                    layoutSimpleBottomSheetModalMoreOptionsButtonContainerConstraintLayout.run {
                         setOnClickListener {
+                            PopupWindow(layoutInflater.inflate(R.layout.layout_overflow_popup_window, null, false), 300, 300, true).showAsDropDown(this, 30, 0)
 
                         }
+                    }
+                }
+
+                if(it.argReference.modalContextPopupMenu.items.isNotEmpty()) {
+                    layoutSimpleBottomSheetModalTouchConstraintLayout.setOnClickListener {
+
                     }
                 }
             }
@@ -125,29 +142,23 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
 
         redraw()
     }
-
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-    }
     
     class Builder(var tag: String) {
         private var argReference = SimpleBottomSheetModalArgReference()
 
         fun setBackgroundColor(@ColorInt color: Int) : Builder = this.apply { argReference.backgroundColor = color }
 
-        fun setTitle(title: TextItem) : Builder = this.apply { argReference.title = title }
+        fun setTitle(title: BottomSheetModalAnatomy.TextItem) : Builder = this.apply { argReference.title = title }
 
-        fun setTextItems(textsItems: MutableList<TextItem>) : Builder = this.apply { argReference.textItems = textsItems }
+        fun setTextItems(textsItems: MutableList<BottomSheetModalAnatomy.TextItem>) : Builder = this.apply { argReference.textItems = textsItems }
 
-        fun setPositiveButton(buttonItem: ButtonItem) : Builder = this.apply { argReference.positiveButton = buttonItem }
+        fun setPositiveButton(buttonItem: BottomSheetModalAnatomy.ButtonItem) : Builder = this.apply { argReference.positiveButton = buttonItem }
 
-        fun setNegativeButton(buttonItem: ButtonItem) : Builder = this.apply { argReference.negativeButton = buttonItem }
+        fun setNegativeButton(buttonItem: BottomSheetModalAnatomy.ButtonItem) : Builder = this.apply { argReference.negativeButton = buttonItem }
 
-        fun setAdditionalButtonsSection(buttonsSection: AdditionalButtonsSection) = this.apply { argReference.additionalButtonsSection = buttonsSection }
+        fun setModalContextPopupMenu(menu: BottomSheetModalAnatomy.Popup.ModalContext.Menu) = this.apply { argReference.modalContextPopupMenu = menu }
+
+        fun setOverflowButtonsContextPopupMenu(menu: BottomSheetModalAnatomy.Popup.OverflowButtonsContext.Menu) = this.apply { argReference.overflowButtonsContextPopupMenu = menu }
 
         fun setOnCancelAction(action: (modal: DialogInterface) -> Unit) : Builder = this.apply { argReference.onCancelAction = action }
 

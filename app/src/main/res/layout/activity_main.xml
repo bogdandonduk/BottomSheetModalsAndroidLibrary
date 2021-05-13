@@ -4,42 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/accent_dark"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/launchText"
+        android:id="@+id/launch_short_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LAUNCH"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Launch short light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/launch_short_dark"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/column"
-        android:layout_width="409dp"
-        android:layout_height="354dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launchText" />
-
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/launch_short_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="fidofiodifdfidofsgshgsgsgsgsghssgshhsgssdfs"
-        android:textColor="@android:color/black"
+        android:text="Launch short dark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/launch_long_light"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/launch_short_light" />
+
+    <TextView
+        android:id="@+id/launch_long_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Launch long light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/launch_long_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launch_short_dark" />
+
+    <TextView
+        android:id="@+id/launch_long_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Launch long dark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launch_long_light" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

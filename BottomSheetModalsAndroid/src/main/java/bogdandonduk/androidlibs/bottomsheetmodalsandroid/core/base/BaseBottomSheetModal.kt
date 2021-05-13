@@ -24,7 +24,7 @@ abstract class BaseBottomSheetModal() : BottomSheetDialogFragment(), RedrawingMo
 
         fragmentContext = requireContext()
 
-        BottomSheetModalsService.addModalForTag(tag!!, this)
+        setStyle(STYLE_NORMAL, R.style.BottomSheetModalStyle)
     }
 
     override fun onCancel(dialog: DialogInterface) {
@@ -43,20 +43,6 @@ abstract class BaseBottomSheetModal() : BottomSheetDialogFragment(), RedrawingMo
             setBackgroundColor(Color.TRANSPARENT)
         }
     }
-
-    fun getBackgroundDrawable(backgroundColor: Int, cornerRadius: Int = 50) =
-        DrawableBuilder()
-            .rectangle()
-            .cornerRadius(cornerRadius)
-            .solidColor(backgroundColor)
-            .build()
-
-    fun getRippleBackgroundDrawable(backgroundColor: Int, cornerRadius: Int = 15) =
-        RippleDrawableBuilder()
-            .color(backgroundColor)
-            .colorStateList(ColorStateList(arrayOf(intArrayOf(android.R.attr.state_pressed)), intArrayOf(Color.DKGRAY)))
-            .radius(cornerRadius)
-            .build()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

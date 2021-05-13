@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="clickable_text_light">#516e99</color> <!--#0080ff-->
+    <color name="clickable_text_dark">#3379b8</color> <!--#82eefd-->
+
+    <color name="accent_light">#fafafa</color>
+    <color name="accent_dark">#303030</color>
 </resources>
