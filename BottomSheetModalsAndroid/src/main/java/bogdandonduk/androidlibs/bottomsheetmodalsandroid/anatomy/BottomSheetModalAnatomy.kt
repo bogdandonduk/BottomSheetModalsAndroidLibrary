@@ -86,7 +86,7 @@ object BottomSheetModalAnatomy {
                     override var text: String,
                     @ColorInt override var textColor: Int,
                     var textItems: MutableList<TextItem>,
-                    override var icon: Icon? = null,
+                    override var icon: Icon? = Icon(context, ResourcesCompat.getDrawable(context.resources, R.drawable.ic_baseline_content_copy_24, null), textColor),
                     var toast: Toast? = null,
                     var postAction: ((copiedText: String) -> Unit)? = null
                 ) : Item(text, textColor, icon, { _: View, popup: PopupWindow ->

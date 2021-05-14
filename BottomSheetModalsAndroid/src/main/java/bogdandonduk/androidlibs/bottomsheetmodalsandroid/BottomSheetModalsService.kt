@@ -16,7 +16,7 @@ object BottomSheetModalsService {
 
     val handler = Handler(Looper.getMainLooper())
 
-    fun startBuildingSimpleModal(tag: String): SimpleBottomSheetModal.Builder = SimpleBottomSheetModal.Builder(tag)
+    fun getSimpleModalBuilder(tag: String): SimpleBottomSheetModal.Builder = SimpleBottomSheetModal.Builder(tag)
 
     fun addModalArgReferenceForTag(tag: String, argReference: BaseBottomSheetModalArgReference) {
         if(modalArgReferencesMap.containsKey(tag) && modalArgReferencesMap[tag]!!::class.java != argReference::class.java)

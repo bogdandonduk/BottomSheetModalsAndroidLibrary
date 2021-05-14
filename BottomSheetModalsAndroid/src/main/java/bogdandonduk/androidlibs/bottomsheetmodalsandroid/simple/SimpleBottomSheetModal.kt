@@ -143,7 +143,7 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
         redraw()
     }
     
-    class Builder(var tag: String) {
+    class Builder internal constructor(var tag: String) {
         private var argReference = SimpleBottomSheetModalArgReference()
 
         fun setBackgroundColor(@ColorInt color: Int) : Builder = this.apply { argReference.backgroundColor = color }

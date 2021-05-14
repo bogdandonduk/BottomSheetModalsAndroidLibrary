@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-            BottomSheetModalsService.startBuildingSimpleModal("some_modal")
+            BottomSheetModalsService.getSimpleModalBuilder("some_modal")
                 .setTitle(
                     BottomSheetModalAnatomy.TextItem(
                         text = "Are you sure?",
