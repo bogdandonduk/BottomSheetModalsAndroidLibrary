@@ -33,7 +33,6 @@
                 android:id="@+id/layout_simple_bottom_sheet_modal_touch_constraint_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:alpha="0.5"
                 android:background="?android:attr/selectableItemBackground"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
