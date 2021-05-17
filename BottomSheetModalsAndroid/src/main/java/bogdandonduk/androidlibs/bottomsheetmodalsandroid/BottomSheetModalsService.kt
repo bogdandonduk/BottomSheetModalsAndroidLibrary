@@ -10,8 +10,6 @@ import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomShee
 object BottomSheetModalsService {
     private val modalArgReferencesMap = mutableMapOf<String, BaseBottomSheetModalArgReference>()
 
-    private val modalsMap = mutableMapOf<String, BaseBottomSheetModal>()
-
     @Volatile var modalShowingCurrently = false
 
     val handler = Handler(Looper.getMainLooper())
@@ -31,17 +29,4 @@ object BottomSheetModalsService {
     fun removeModalArgReferenceForTag(tag: String) {
         modalArgReferencesMap.remove(tag)
     }
-
-    fun addModalForTag(tag: String, modal: BaseBottomSheetModal, override: Boolean = true) {
-        if(override || !modalsMap.containsKey(tag))
-            modalsMap[tag] = modal
-    }
-
-    fun <BaseBottomSheetModalArgReference> getModalForTag(tag: String) = modalsMap[tag]
-
-    fun removeModalForTag(tag: String) {
-        modalsMap.remove(tag)
-    }
-
-    fun <BaseBottomSheetModalArgReference> getRedrawingModalForTag(tag: String) = modalsMap[tag] as RedrawingModal
 }

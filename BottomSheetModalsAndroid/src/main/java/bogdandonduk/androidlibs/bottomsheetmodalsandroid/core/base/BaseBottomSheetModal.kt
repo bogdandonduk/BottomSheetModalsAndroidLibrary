@@ -28,7 +28,7 @@ abstract class BaseBottomSheetModal() : BottomSheetDialogFragment(), RedrawingMo
     }
 
     override fun onCancel(dialog: DialogInterface) {
-        dismiss()
+        dialog.dismiss()
     }
 
     fun expandSheet() {

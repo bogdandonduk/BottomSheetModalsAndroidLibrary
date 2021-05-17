@@ -26,8 +26,6 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
 
     override var viewModel: SimpleBottomSheetModalViewModel? = null
 
-    var scrollInProgress: Boolean = false
-
     override val viewModelInitialization: () -> SimpleBottomSheetModalViewModel = {
         ViewModelProvider(
             viewModelStore,
@@ -54,6 +52,8 @@ class SimpleBottomSheetModal : BaseBottomSheetModal(), ViewModelHost<SimpleBotto
     override fun redraw() {
         with(viewBinding) {
             getCurrentViewModel().let {
+                it.argReference.modal = this@SimpleBottomSheetModal
+
                 layoutSimpleBottomSheetModalContentContainerConstraintLayout.background = BottomSheetModalAnatomy.Background.getModalBackgroundDrawable(it.argReference.backgroundColor)
 
                 initializeList(
