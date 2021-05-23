@@ -1,32 +1,49 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
-import android.os.Handler
-import android.os.Looper
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.RedrawingModal
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModal
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalArgReference
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModal
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalModel
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalModel
 
 object BottomSheetModalsService {
-    private val modalArgReferencesMap = mutableMapOf<String, BaseBottomSheetModalArgReference>()
+    internal val modalModelsMap = mutableMapOf<String, BaseBottomSheetModalModel>()
+    @Volatile internal var modalCurrentlyShowing = false
 
-    @Volatile var modalShowingCurrently = false
-
-    val handler = Handler(Looper.getMainLooper())
-
-    fun getSimpleModalBuilder(tag: String): SimpleBottomSheetModal.Builder = SimpleBottomSheetModal.Builder(tag)
-
-    fun addModalArgReferenceForTag(tag: String, argReference: BaseBottomSheetModalArgReference) {
-        if(modalArgReferencesMap.containsKey(tag) && modalArgReferencesMap[tag]!!::class.java != argReference::class.java)
-            throw IllegalArgumentException("modalArgReferencesMap already contains item with this tag but its type is different from type of passed argReference")
-        else if(!modalArgReferencesMap.containsKey(tag))
-            modalArgReferencesMap[tag] = argReference
+    @Synchronized
+    internal fun addModalModelToMap(tag: String, model: BaseBottomSheetModalModel) {
+        if(modalModelsMap.containsKey(tag) && modalModelsMap[tag]!!::class.java != model::class.java)
+            throw IllegalArgumentException("modalModelsMap already contains item with this tag but its type is different from passed ")
+        else
+            modalModelsMap[tag] = model
     }
 
+    @PublishedApi
     @Suppress("UNCHECKED_CAST")
-    fun <T : BaseBottomSheetModalArgReference> getModalArgReferenceForTag(tag: String) = modalArgReferencesMap[tag] as T?
+    internal fun <T : BaseBottomSheetModalModel> getModalModelFromMap(tag: String) = modalModelsMap[tag] as T?
 
-    fun removeModalArgReferenceForTag(tag: String) {
-        modalArgReferencesMap.remove(tag)
+    internal fun removeModalModelFromMap(tag: String) {
+        modalModelsMap.remove(tag)
+    }
+
+    @Synchronized
+    internal fun dismissAllMapModals(clear: Boolean = false) {
+        modalModelsMap.run {
+            forEach {
+                it.value.modal?.dismiss()
+
+                if(clear) remove(it.key)
+            }
+        }
+    }
+
+    inline fun updateSimpleModalModelAndShowIfVisible(tag: String, applyModificationOnlyIfVisible: Boolean = false, modification: (model: SimpleBottomSheetModalModel) -> Unit) {
+        getModalModelFromMap<SimpleBottomSheetModalModel>(tag).run {
+            if(this != null)
+                if(!applyModificationOnlyIfVisible) {
+                    modification.invoke(this)
+                    modal?.drawContent()
+                } else if(applyModificationOnlyIfVisible && modal != null) {
+                    modification.invoke(this)
+                    modal!!.drawContent()
+                }
+        }
     }
 }

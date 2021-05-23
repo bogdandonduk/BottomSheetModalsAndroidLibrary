@@ -2,21 +2,17 @@ package bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import androidx.fragment.app.FragmentManager
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.R
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.RedrawingModal
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import top.defaults.drawabletoolbox.DrawableBuilder
-import top.defaults.drawabletoolbox.RippleDrawableBuilder
 
-abstract class BaseBottomSheetModal() : BottomSheetDialogFragment(), RedrawingModal {
-
+abstract class BaseBottomSheetModal : BottomSheetDialogFragment() {
     lateinit var fragmentContext: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +27,11 @@ abstract class BaseBottomSheetModal() : BottomSheetDialogFragment(), RedrawingMo
         dialog.dismiss()
     }
 
-    fun expandSheet() {
-        dialog?.setOnShowListener {
-            BottomSheetBehavior.from(dialog!!.findViewById<FrameLayout>(R.id.design_bottom_sheet)!!).state = BottomSheetBehavior.STATE_EXPANDED
-            BottomSheetModalsService.modalShowingCurrently = true
-        }
+    private fun expandSheet() {
+        BottomSheetBehavior.from(dialog!!.findViewById<FrameLayout>(R.id.design_bottom_sheet)!!).state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    fun transparifyBackground() {
+    private fun transparifyBackground() {
         (view?.parent as View).run {
             setBackgroundColor(Color.TRANSPARENT)
         }
@@ -47,7 +40,22 @@ abstract class BaseBottomSheetModal() : BottomSheetDialogFragment(), RedrawingMo
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        expandSheet()
         transparifyBackground()
+        dialog?.setOnShowListener {
+            BottomSheetModalsService.modalCurrentlyShowing = true
+            expandSheet()
+        }
+
+        drawContent()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        BottomSheetModalsService.getModalModelFromMap<BaseBottomSheetModalModel>(tag!!)?.modal = null
+    }
+
+    abstract fun drawContent()
+
+    abstract fun initializeAppearance()
 }

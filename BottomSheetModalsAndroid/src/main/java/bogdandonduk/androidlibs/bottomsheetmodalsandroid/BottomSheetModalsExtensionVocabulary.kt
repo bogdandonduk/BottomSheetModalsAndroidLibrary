@@ -1,5 +1,5 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
 object BottomSheetModalsExtensionVocabulary {
-    const val KEY_SIMPLE_MODAL = "key_simple_modal"
+    internal const val KEY_REMOVE_FROM_MAP_ON_DISMISS = "key_remove_from_map_on_dismiss"
 }
