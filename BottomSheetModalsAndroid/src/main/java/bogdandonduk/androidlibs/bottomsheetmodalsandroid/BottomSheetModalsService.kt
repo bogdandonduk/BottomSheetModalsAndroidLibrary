@@ -1,6 +1,7 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalModel
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModal
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalModel
 
 object BottomSheetModalsService {
@@ -46,4 +47,8 @@ object BottomSheetModalsService {
                 }
         }
     }
+
+    fun getSimpleModalBuilder(tag: String, restorePreviousState: Boolean = true) = SimpleBottomSheetModal.Builder(tag, restorePreviousState)
+
+
 }

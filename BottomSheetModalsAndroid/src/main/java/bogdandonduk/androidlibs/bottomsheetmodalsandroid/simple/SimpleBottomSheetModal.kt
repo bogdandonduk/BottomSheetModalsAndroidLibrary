@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsExtensionVocabulary
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsTagUtils
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.anatomy.*
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.anatomy.ContextMenu
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModal
@@ -27,7 +28,7 @@ import bogdandonduk.androidlibs.viewmodelutilsandroid.GenericViewModelFactory
 import bogdandonduk.androidlibs.viewmodelutilsandroid.ViewModelHost
 import top.defaults.drawabletoolbox.DrawableBuilder
 
-class SimpleBottomSheetModal() : BaseBottomSheetModal(), ViewModelHost<SimpleBottomSheetModalViewModel>,
+internal class SimpleBottomSheetModal() : BaseBottomSheetModal(), ViewModelHost<SimpleBottomSheetModalViewModel>,
     LateinitViewBinder<LayoutSimpleBottomSheetModalBinding>, RecyclerViewHost, ButtonHostModal {
     override lateinit var viewBinding: LayoutSimpleBottomSheetModalBinding
 
@@ -204,11 +205,13 @@ class SimpleBottomSheetModal() : BaseBottomSheetModal(), ViewModelHost<SimpleBot
             }
     }
     
-    class Builder(tag: String, var restorePreviousStateIfSaved: Boolean = true) {
+    class Builder internal constructor(tag: String = BottomSheetModalsTagUtils.generateRandomTag(), restorePreviousStateIfSaved: Boolean = true) {
         var model =
             if(restorePreviousStateIfSaved && BottomSheetModalsService.getModalModelFromMap<SimpleBottomSheetModalModel>(tag) != null)
                 BottomSheetModalsService.getModalModelFromMap(tag)!!
-            else
+            else {
+                BottomSheetModalsTagUtils.transientTagRegistry.add(tag)
+
                 SimpleBottomSheetModalModel(
                     tag = tag,
 
@@ -231,6 +234,8 @@ class SimpleBottomSheetModal() : BaseBottomSheetModal(), ViewModelHost<SimpleBot
 
                     callbacks = Callbacks()
                 )
+            }
+
 
         inline fun setAppearance(initialization: (oldAppearance: Appearance) -> Appearance) = this.apply {
             model.appearance = initialization.invoke(model.appearance)
@@ -286,6 +291,8 @@ class SimpleBottomSheetModal() : BaseBottomSheetModal(), ViewModelHost<SimpleBot
                         BottomSheetModalsExtensionVocabulary.KEY_REMOVE_FROM_MAP_ON_DISMISS to removeModelFromMapOnModalDismiss
                     )
                 }.show(fragmentManager, model.tag)
+
+                BottomSheetModalsTagUtils.transientTagRegistry.remove(model.tag)
             }
         }
     }
