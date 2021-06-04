@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="BottomSheetModalStyle" parent="Theme.Design.BottomSheetDialog">
-        <item name="android:colorControlHighlight">@android:color/darker_gray</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-    <style name="SelectableStyle">
-        <item name="colorControlHighlight">@android:color/darker_gray</item>
-    </style>
-
     <style name="CardStyle">
         <item name="cardBackgroundColor">@android:color/transparent</item>
         <item name="cardElevation">0dp</item>

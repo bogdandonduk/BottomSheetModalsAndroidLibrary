@@ -5,7 +5,7 @@ import androidx.annotation.ColorInt
 
 data class Text(
     var text: String,
-    @ColorInt var color: Int,
+    @ColorInt var textColor: Int,
     var icon: Drawable? = null,
     @ColorInt var iconTintColor: Int? = null
 )

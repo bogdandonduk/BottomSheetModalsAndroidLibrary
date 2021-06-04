@@ -5,7 +5,8 @@ import android.view.View
 import androidx.annotation.ColorInt
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class Button(
+@PublishedApi
+internal class Button(
     var text: String,
     @ColorInt var textColor: Int,
     var icon: Drawable? = null,

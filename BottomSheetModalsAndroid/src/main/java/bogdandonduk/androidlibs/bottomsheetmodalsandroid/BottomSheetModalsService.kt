@@ -1,7 +1,8 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.BottomSheetModalsTagUtils
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalModel
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModal
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalBuilder
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalModel
 
 object BottomSheetModalsService {
@@ -35,20 +36,20 @@ object BottomSheetModalsService {
         }
     }
 
-    inline fun updateSimpleModalModelAndShowIfVisible(tag: String, applyModificationOnlyIfVisible: Boolean = false, modification: (model: SimpleBottomSheetModalModel) -> Unit) {
+    inline fun updateSimpleModalModelAndShowIfVisible(tag: String, applyModificationOnlyIfVisible: Boolean = false, modification: (builder: SimpleBottomSheetModalBuilder) -> SimpleBottomSheetModalBuilder) {
         getModalModelFromMap<SimpleBottomSheetModalModel>(tag).run {
+            val builder = getSimpleModalBuilder(tag)
+
             if(this != null)
                 if(!applyModificationOnlyIfVisible) {
-                    modification.invoke(this)
+                    modification.invoke(builder)
                     modal?.drawContent()
                 } else if(applyModificationOnlyIfVisible && modal != null) {
-                    modification.invoke(this)
+                    modification.invoke(builder)
                     modal!!.drawContent()
                 }
         }
     }
 
-    fun getSimpleModalBuilder(tag: String, restorePreviousState: Boolean = true) = SimpleBottomSheetModal.Builder(tag, restorePreviousState)
-
-
+    fun getSimpleModalBuilder(tag: String = BottomSheetModalsTagUtils.generateRandomTag(), restorePreviousState: Boolean = true) = SimpleBottomSheetModalBuilder(tag, restorePreviousState)
 }

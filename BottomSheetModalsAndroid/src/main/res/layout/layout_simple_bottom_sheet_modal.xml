@@ -23,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingStart="30dp"
+            android:paddingTop="20dp"
             android:paddingEnd="30dp"
             android:paddingBottom="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +135,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="55dp"
+                android:paddingBottom="46dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -145,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

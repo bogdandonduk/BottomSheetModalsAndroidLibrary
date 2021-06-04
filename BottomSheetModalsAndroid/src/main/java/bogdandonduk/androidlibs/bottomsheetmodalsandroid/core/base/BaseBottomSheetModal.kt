@@ -12,15 +12,14 @@ import bogdandonduk.androidlibs.bottomsheetmodalsandroid.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseBottomSheetModal : BottomSheetDialogFragment() {
+@PublishedApi
+internal abstract class BaseBottomSheetModal : BottomSheetDialogFragment() {
     lateinit var fragmentContext: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         fragmentContext = requireContext()
-
-        setStyle(STYLE_NORMAL, R.style.BottomSheetModalStyle)
     }
 
     override fun onCancel(dialog: DialogInterface) {
