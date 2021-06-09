@@ -1,16 +1,16 @@
 package bogdandonduk.androidlibs.bottomsheetmodalsandroid
 
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.BottomSheetModalsTagUtils
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.BottomSheetModalsTaggingUtils
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalModel
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalBuilder
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.SimpleBottomSheetModalModel
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.BottomSheetModalBuilder
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple.BottomSheetModalModel
 
 object BottomSheetModalsService {
     internal val modalModelsMap = mutableMapOf<String, BaseBottomSheetModalModel>()
     @Volatile internal var modalCurrentlyShowing = false
 
     @Synchronized
-    internal fun addModalModelToMap(tag: String, model: BaseBottomSheetModalModel) {
+    internal fun addModalModel(tag: String, model: BaseBottomSheetModalModel) {
         if(modalModelsMap.containsKey(tag) && modalModelsMap[tag]!!::class.java != model::class.java)
             throw IllegalArgumentException("modalModelsMap already contains item with this tag but its type is different from passed ")
         else
@@ -19,26 +19,30 @@ object BottomSheetModalsService {
 
     @PublishedApi
     @Suppress("UNCHECKED_CAST")
-    internal fun <T : BaseBottomSheetModalModel> getModalModelFromMap(tag: String) = modalModelsMap[tag] as T?
+    internal fun <T : BaseBottomSheetModalModel> getModalModel(tag: String) = modalModelsMap[tag] as T?
 
-    internal fun removeModalModelFromMap(tag: String) {
+    internal fun removeModalModel(tag: String) {
         modalModelsMap.remove(tag)
     }
 
     @Synchronized
-    internal fun dismissAllMapModals(clear: Boolean = false) {
+    internal fun dismissAllModals(removeModels: Boolean = true) {
         modalModelsMap.run {
             forEach {
                 it.value.modal?.dismiss()
 
-                if(clear) remove(it.key)
+                if(removeModels) remove(it.key)
             }
         }
     }
 
-    inline fun updateSimpleModalModelAndShowIfVisible(tag: String, applyModificationOnlyIfVisible: Boolean = false, modification: (builder: SimpleBottomSheetModalBuilder) -> SimpleBottomSheetModalBuilder) {
-        getModalModelFromMap<SimpleBottomSheetModalModel>(tag).run {
-            val builder = getSimpleModalBuilder(tag)
+    inline fun updateSimpleModalModelAndShowIfVisible(
+        tag: String,
+        applyModificationOnlyIfVisible: Boolean = false,
+        modification: (builder: BottomSheetModalBuilder) -> BottomSheetModalBuilder
+    ) {
+        getModalModel<BottomSheetModalModel>(tag).run {
+            val builder = buildModal(tag)
 
             if(this != null)
                 if(!applyModificationOnlyIfVisible) {
@@ -51,5 +55,5 @@ object BottomSheetModalsService {
         }
     }
 
-    fun getSimpleModalBuilder(tag: String = BottomSheetModalsTagUtils.generateRandomTag(), restorePreviousState: Boolean = true) = SimpleBottomSheetModalBuilder(tag, restorePreviousState)
+    fun buildModal(tag: String = BottomSheetModalsTaggingUtils.generateRandomTag(), restorePreviousState: Boolean = true) = BottomSheetModalBuilder(tag, restorePreviousState)
 }

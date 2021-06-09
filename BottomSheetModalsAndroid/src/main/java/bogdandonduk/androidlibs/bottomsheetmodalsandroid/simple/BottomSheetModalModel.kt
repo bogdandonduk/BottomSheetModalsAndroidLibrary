@@ -4,7 +4,7 @@ import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.anatomy.*
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalModel
 
 @PublishedApi
-internal class SimpleBottomSheetModalModel(
+internal class BottomSheetModalModel(
     override var tag: String,
     var appearance: Appearance,
 

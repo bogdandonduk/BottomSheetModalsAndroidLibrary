@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import androidx.fragment.app.FragmentManager
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -51,7 +50,7 @@ internal abstract class BaseBottomSheetModal : BottomSheetDialogFragment() {
     override fun onDestroy() {
         super.onDestroy()
 
-        BottomSheetModalsService.getModalModelFromMap<BaseBottomSheetModalModel>(tag!!)?.modal = null
+        BottomSheetModalsService.getModalModel<BaseBottomSheetModalModel>(tag!!)?.modal = null
     }
 
     abstract fun drawContent()

@@ -3,7 +3,7 @@ package bogdandonduk.androidlibs.bottomsheetmodalsandroid.core
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.BottomSheetModalsService
 import kotlin.random.Random
 
-object BottomSheetModalsTagUtils {
+object BottomSheetModalsTaggingUtils {
     internal val transientTagRegistry = mutableListOf<String>()
     
     fun generateRandomTag() : String {

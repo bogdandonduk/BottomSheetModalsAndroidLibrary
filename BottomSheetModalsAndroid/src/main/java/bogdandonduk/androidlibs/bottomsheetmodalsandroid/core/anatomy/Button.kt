@@ -11,5 +11,5 @@ internal class Button(
     @ColorInt var textColor: Int,
     var icon: Drawable? = null,
     @ColorInt var iconTintColor: Int? = null,
-    var clickAction: ((view: View, modal: BottomSheetDialogFragment) -> Unit)? = null
+    var onClickAction: ((view: View, modal: BottomSheetDialogFragment) -> Unit)? = null
 )

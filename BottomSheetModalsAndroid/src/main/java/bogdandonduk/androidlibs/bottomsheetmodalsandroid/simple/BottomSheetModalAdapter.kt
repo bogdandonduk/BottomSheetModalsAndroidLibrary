@@ -8,16 +8,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.anatomy.Text
-import bogdandonduk.androidlibs.bottomsheetmodalsandroid.databinding.LayoutSimpleBottomSheetModalTextItemBinding
+import bogdandonduk.androidlibs.bottomsheetmodalsandroid.databinding.LayoutBottomSheetModalTextItemBinding
 import bogdandonduk.androidlibs.commonpreferencesutilsandroid.VibrationUtils
 import bogdandonduk.androidlibs.viewbindingutilsandroid.ViewBinder
 
-internal class SimpleBottomSheetModalAdapter(
+internal class BottomSheetModalAdapter(
     var title: Text,
     var textContentItems: MutableList<Text>,
     var hostActivity: FragmentActivity,
     var touchHolder: View
-) : RecyclerView.Adapter<SimpleBottomSheetModalAdapter.SimpleBottomSheetModalTextViewHolder>() {
+) : RecyclerView.Adapter<BottomSheetModalAdapter.ViewHolder>() {
     private lateinit var hostRecyclerView: RecyclerView
 
     init {
@@ -29,10 +29,10 @@ internal class SimpleBottomSheetModalAdapter(
     }
 
     @SuppressLint("ClickableViewAccessibility", "InflateParams")
-    inner class SimpleBottomSheetModalTextViewHolder(
-        override val viewBindingInitialization: () -> LayoutSimpleBottomSheetModalTextItemBinding,
-        override var viewBinding: LayoutSimpleBottomSheetModalTextItemBinding? = viewBindingInitialization.invoke()
-    ) : RecyclerView.ViewHolder(viewBinding!!.root), ViewBinder<LayoutSimpleBottomSheetModalTextItemBinding> {
+    inner class ViewHolder(
+        override val viewBindingInitialization: () -> LayoutBottomSheetModalTextItemBinding,
+        override var viewBinding: LayoutBottomSheetModalTextItemBinding? = viewBindingInitialization.invoke()
+    ) : RecyclerView.ViewHolder(viewBinding!!.root), ViewBinder<LayoutBottomSheetModalTextItemBinding> {
 
         init {
             getCurrentViewBinding().root.run {
@@ -57,15 +57,15 @@ internal class SimpleBottomSheetModalAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = SimpleBottomSheetModalTextViewHolder(viewBindingInitialization = { LayoutSimpleBottomSheetModalTextItemBinding.inflate(hostActivity.layoutInflater, parent, false) })
+    ) = ViewHolder({ LayoutBottomSheetModalTextItemBinding.inflate(hostActivity.layoutInflater, parent, false) })
 
-    override fun onBindViewHolder(holder: SimpleBottomSheetModalTextViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.getCurrentViewBinding().run {
             textContentItems[position].let {
                 if(it.icon != null) {
-                    layoutSimpleBottomSheetModalItemIconContainerConstraintLayout.visibility = View.VISIBLE
+                    layoutBottomSheetModalItemIconContainerConstraintLayout.visibility = View.VISIBLE
 
-                    layoutSimpleBottomSheetModalItemIconImageView.run {
+                    layoutBottomSheetModalItemIconImageView.run {
                         layoutParams = if(position == 0)
                             ConstraintLayout.LayoutParams(80, 80)
                         else
@@ -74,9 +74,9 @@ internal class SimpleBottomSheetModalAdapter(
                         setImageDrawable(it.icon)
                     }
                 } else
-                    layoutSimpleBottomSheetModalItemIconContainerConstraintLayout.visibility = View.GONE
+                    layoutBottomSheetModalItemIconContainerConstraintLayout.visibility = View.GONE
 
-                layoutSimpleBottomSheetModalItemTextTextView.run {
+                layoutBottomSheetModalItemTextTextView.run {
                     textSize = if(position == 0) 20f else 16f
                     setTextColor(it.textColor)
                     setTypeface(null, if(position == 0) Typeface.BOLD else Typeface.NORMAL)
@@ -84,7 +84,7 @@ internal class SimpleBottomSheetModalAdapter(
                     text = it.text
                 }
 
-                layoutSimpleBottomSheetModalItemUnderplaceholderLinearLayout.visibility = if(position == 0) View.VISIBLE else View.GONE
+                layoutBottomSheetModalItemUnderplaceholderLinearLayout.visibility = if(position == 0) View.VISIBLE else View.GONE
             }
         }
     }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_simple_bottom_sheet_modal_content_container_constraint_layout"
+        android:id="@+id/layout_bottom_sheet_modal_content_container_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_simple_bottom_sheet_modal_touch_constraint_layout"
+            android:id="@+id/layout_bottom_sheet_modal_touch_constraint_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingStart="30dp"
@@ -32,59 +32,59 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/layout_simple_bottom_sheet_modal_negative_button_text_view"
+                android:id="@+id/layout_bottom_sheet_modal_negative_button_text_view"
                 style="@style/ButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
-                app:layout_constraintEnd_toStartOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintEnd_toStartOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintTop_toTopOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 tools:text="Cancel" />
 
             <LinearLayout
-                android:id="@+id/layout_simple_bottom_sheet_modal_button_divider_linear_layout"
+                android:id="@+id/layout_bottom_sheet_modal_button_divider_linear_layout"
                 android:layout_width="1dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
-                app:layout_constraintEnd_toStartOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
-                app:layout_constraintStart_toEndOf="@+id/layout_simple_bottom_sheet_modal_negative_button_text_view"
-                app:layout_constraintTop_toTopOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintEnd_toStartOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintStart_toEndOf="@+id/layout_bottom_sheet_modal_negative_button_text_view"
+                app:layout_constraintTop_toTopOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 tools:background="@android:color/darker_gray" />
 
 
             <TextView
-                android:id="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                android:id="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 style="@style/ButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/layout_simple_bottom_sheet_modal_button_divider_2_container_constraint_layout"
+                app:layout_constraintEnd_toStartOf="@+id/layout_bottom_sheet_modal_button_divider_2_container_constraint_layout"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/layout_simple_bottom_sheet_modal_negative_button_text_view"
+                app:layout_constraintStart_toEndOf="@+id/layout_bottom_sheet_modal_negative_button_text_view"
                 tools:text="Confirm" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_simple_bottom_sheet_modal_button_divider_2_container_constraint_layout"
+                android:id="@+id/layout_bottom_sheet_modal_button_divider_2_container_constraint_layout"
                 android:layout_width="11dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
-                app:layout_constraintEnd_toStartOf="@+id/layout_simple_bottom_sheet_modal_more_options_button_container_constraint_layout"
-                app:layout_constraintTop_toTopOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintEnd_toStartOf="@+id/layout_bottom_sheet_modal_more_options_button_container_constraint_layout"
+                app:layout_constraintTop_toTopOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 tools:visibility="visible">
 
                 <LinearLayout
-                    android:id="@+id/layout_simple_bottom_sheet_modal_button_divider_2_linear_layout"
+                    android:id="@+id/layout_bottom_sheet_modal_button_divider_2_linear_layout"
                     android:layout_width="1dp"
                     android:layout_height="0dp"
                     android:orientation="horizontal"
@@ -96,19 +96,19 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_simple_bottom_sheet_modal_more_options_button_container_constraint_layout"
+                android:id="@+id/layout_bottom_sheet_modal_more_options_button_container_constraint_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:padding="8dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/layout_simple_bottom_sheet_modal_positive_button_text_view"
+                app:layout_constraintTop_toTopOf="@+id/layout_bottom_sheet_modal_positive_button_text_view"
                 tools:visibility="visible">
 
                 <ImageView
-                    android:id="@+id/layout_simple_bottom_sheet_modal_more_options_button_icon_image_view"
+                    android:id="@+id/layout_bottom_sheet_modal_more_options_button_icon_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -122,7 +122,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_simple_bottom_sheet_modal_content_constraint_layout"
+            android:id="@+id/layout_bottom_sheet_modal_content_constraint_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
@@ -141,7 +141,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/layout_simple_bottom_sheet_modal_text_container_recycler_view"
+                    android:id="@+id/layout_bottom_sheet_modal_text_container_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"

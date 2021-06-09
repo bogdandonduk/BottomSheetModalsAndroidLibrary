@@ -2,6 +2,6 @@ package bogdandonduk.androidlibs.bottomsheetmodalsandroid.simple
 
 import bogdandonduk.androidlibs.bottomsheetmodalsandroid.core.base.BaseBottomSheetModalViewModel
 
-internal class SimpleBottomSheetModalViewModel(
-    var model: SimpleBottomSheetModalModel
+internal class BottomSheetModalViewModel(
+    var model: BottomSheetModalModel
 ) : BaseBottomSheetModalViewModel(model.tag)

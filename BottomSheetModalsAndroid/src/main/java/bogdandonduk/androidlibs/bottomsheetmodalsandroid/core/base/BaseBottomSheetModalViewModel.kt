@@ -7,7 +7,7 @@ internal abstract class BaseBottomSheetModalViewModel(open var tag: String) : Vi
     var removeModelFromMapOnModalDismiss: Boolean = true
 
     override fun onCleared() {
-        if(removeModelFromMapOnModalDismiss) BottomSheetModalsService.removeModalModelFromMap(tag)
+        if(removeModelFromMapOnModalDismiss) BottomSheetModalsService.removeModalModel(tag)
 
         BottomSheetModalsService.modalCurrentlyShowing = false
     }
