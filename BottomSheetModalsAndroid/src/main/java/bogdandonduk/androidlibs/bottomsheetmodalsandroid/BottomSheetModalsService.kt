@@ -55,5 +55,5 @@ object BottomSheetModalsService {
         }
     }
 
-    fun buildModal(tag: String = BottomSheetModalsTaggingUtils.generateRandomTag(), restorePreviousState: Boolean = true) = BottomSheetModalBuilder(tag, restorePreviousState)
+    fun buildModal(tag: String = BottomSheetModalsTaggingUtils.generateRandomTag()) = BottomSheetModalBuilder(tag)
 }

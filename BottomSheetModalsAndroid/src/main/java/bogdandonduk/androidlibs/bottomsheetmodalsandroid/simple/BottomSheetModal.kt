@@ -42,7 +42,7 @@ internal class BottomSheetModal : BaseBottomSheetModal(), ViewModelHost<BottomSh
 
         getCurrentViewModel().run {
             model.modal = this@BottomSheetModal
-            removeModelFromMapOnModalDismiss = requireArguments().getBoolean(BottomSheetModalsExtensionVocabulary.KEY_REMOVE_FROM_MAP_ON_DISMISS, true)
+            removeModelFromMapOnModalDismiss = requireArguments().getBoolean(BottomSheetModalsExtensionVocabulary.KEY_REMOVE_MODEL_ON_DISMISS, true)
         }
     }
 

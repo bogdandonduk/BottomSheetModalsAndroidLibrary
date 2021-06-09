@@ -314,13 +314,13 @@ class BottomSheetModalBuilder internal constructor(tag: String) {
         BottomSheetModalsService.addModalModel(model.tag, model)
     }
 
-    fun show(fragmentManager: FragmentManager, addAsSecondOnTop: Boolean = false, saveStateAfterDismissal: Boolean = false) : String? =
+    fun show(fragmentManager: FragmentManager, addAsSecondOnTop: Boolean = false, saveModel: Boolean = false) : String? =
         if(addAsSecondOnTop || !BottomSheetModalsService.modalCurrentlyShowing) {
             save()
 
             BottomSheetModal().apply {
                 arguments = bundleOf(
-                    BottomSheetModalsExtensionVocabulary.KEY_REMOVE_FROM_MAP_ON_DISMISS to !saveStateAfterDismissal
+                    BottomSheetModalsExtensionVocabulary.KEY_REMOVE_MODEL_ON_DISMISS to !saveModel
                 )
             }.show(fragmentManager, model.tag)
 
